@@ -38,7 +38,7 @@ int main() {
 
   // CT
   for (i = 0; i < n; i++) {
-    // considering CPU idle time
+    // CPU idle time
     if (curr_time < at[i]) {
       curr_time = at[i];
     }
@@ -84,8 +84,8 @@ int main() {
   //   printf("P%d\t%d\t%d\t%d\t%d\t%d\t%d\n", pid[i], at[i], bt[i], ct[i],
   //   tat[i], wt[i], rt[i]);
 
-  printf("\nAverage TAT: %f\n", (tat_sum / n));
-  printf("Average WT: %f\n", (wt_sum / n));
+  printf("\nAverage TAT: %.2f\n", (tat_sum / n));
+  printf("Average WT: %.2f\n", (wt_sum / n));
 
   return 0;
 }

@@ -1,0 +1,88 @@
+#include <stdio.h>
+
+int main() {
+  int n, completed = 0, curr_time = 0, pid[10], at[10], bt[10], remt[10],
+         ct[10], tat[10], wt[10], st[10], rt[10], i, j;
+  double tat_sum = 0, wt_sum = 0;
+
+  printf("Enter no. of processes: ");
+  scanf("%d", &n);
+
+  for (i = 0; i < n; i++) {
+    pid[i] = i + 1;
+
+    printf("Enter arrival time for process[%d]: ", i + 1);
+    scanf("%d", &at[i]);
+
+    printf("Enter burst time for process[%d]: ", i + 1);
+    scanf("%d", &bt[i]);
+    remt[i] = bt[i]; // initialising remaining time
+  }
+
+  // running a while loop for each time interval
+  // until all the processes have completed
+  while (completed != n) {
+
+    int min = 99999999, // to set the lowest remaining time
+        s = -1;         // index of the process with the shortest remaining time
+
+    for (i = 0; i < n; i++) {
+      // 1. AT is now or before current time
+      // 2. process has some remaining time
+      // 3. least remaining time
+      if (at[i] <= curr_time && remt[i] > 0 && remt[i] < min) {
+        min = remt[i];
+        s = i;
+      }
+    }
+
+    // CPU idle time
+    if (s == -1) {
+      curr_time++;
+      continue;
+    }
+
+    // if the process is in the CPU for the first time
+    if (remt[s] == bt[s])
+      st[s] = curr_time;
+
+    // decrement the remaining time of the process
+    remt[s]--;
+
+    // if the process has completed
+    if (remt[s] == 0) {
+      // CT
+      ct[s] = curr_time + 1;
+
+      // TAT
+      tat[s] = ct[s] - at[s];
+      tat_sum += tat[s];
+
+      // WT
+      wt[s] = tat[s] - bt[s];
+      wt_sum += wt[s];
+
+      // RT
+      rt[s] = st[s] - at[s];
+
+      // increment the completed processes count
+      completed++;
+    }
+    curr_time++;
+  }
+
+  // header row
+  printf("\nP\tAT\tBT\tCT\tTAT\tWT\tRT\n\n");
+
+  // sorted by PID
+  for (j = 1; j < n + 1; j++) {
+    for (i = 0; i < n; i++) {
+      if (pid[i] == j)
+        printf("P%d\t%d\t%d\t%d\t%d\t%d\t%d\n", pid[i], at[i], bt[i], ct[i],
+               tat[i], wt[i], rt[i]);
+    }
+  }
+
+  printf("\nAverage TAT: %.2f\n", (tat_sum / n));
+  printf("Average WT: %.2f\n", (wt_sum / n));
+}
