@@ -1,6 +1,8 @@
 #include <stdio.h>
 
 int main() {
+  printf("Name: ROHAN PODDAR\nUSN:1WA24CS238\n\n");
+
   int n, completed = 0, curr_time = 0, pid[10], at[10], bt[10], remt[10],
          ct[10], tat[10], wt[10], st[10], rt[10], i, j;
   double tat_sum = 0, wt_sum = 0;
