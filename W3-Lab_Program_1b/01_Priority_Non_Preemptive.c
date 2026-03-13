@@ -82,14 +82,14 @@ int main() {
   }
 
   // header row
-  printf("\nP\tAT\tBT\tCT\tTAT\tWT\tRT\n\n");
+  printf("\nP\tAT\tBT\tPR\tCT\tTAT\tWT\tRT\n\n");
 
   // sorted by PID
   for (j = 1; j < n + 1; j++) {
     for (i = 0; i < n; i++) {
       if (pid[i] == j)
-        printf("P%d\t%d\t%d\t%d\t%d\t%d\t%d\n", pid[i], at[i], bt[i], ct[i],
-               tat[i], wt[i], rt[i]);
+        printf("P%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\n", pid[i], at[i], bt[i], p[i],
+               ct[i], tat[i], wt[i], rt[i]);
     }
   }
 
