@@ -11,7 +11,7 @@ struct Task {
   int priority;
 };
 
-int gcd(int a, int b) {
+ixcode-select --installnt gcd(int a, int b) {
   while (b != 0) {
     int t = b;
     b = a % b;
